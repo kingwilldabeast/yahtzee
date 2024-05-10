@@ -150,11 +150,10 @@ function displayOptions() {
 
 // lock or unlock an individual die
 function lockDie(die) {
-
-        let index = parseInt(die.getAttribute('id'))
-        diceLocked[index] == true ? diceLocked[index] = false : diceLocked[index] = true
-
-        // console.log('Clicked die ID:', diceLocked);
+    let index = parseInt(die.getAttribute('id'))
+    diceLocked[index] == true ? diceLocked[index] = false : diceLocked[index] = true
+    updateDisplay()
+    // console.log('Clicked die ID:', diceLocked);
 }
 
 //update dice appearance based on array of number values
@@ -162,6 +161,11 @@ function updateDisplay() {
     dice.forEach((die) => {
         let index = parseInt(die.getAttribute('id'))
         die.innerText = diceValues[index]
+        if (diceLocked[index] == true) {
+            die.classList.add('dieLocked')
+        } else {
+            die.classList.remove('dieLocked')
+        }
     })
 }
 

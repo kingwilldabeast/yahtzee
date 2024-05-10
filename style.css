@@ -5,3 +5,12 @@
 .scoreLocked {
     border: 1px solid darkgreen;
 }
+
+.dice {
+    border: 1px solid gray;
+
+}
+
+.dieLocked {
+    border: 1px solid blue;
+}
