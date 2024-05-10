@@ -36,7 +36,7 @@ const fours = document.querySelector('#fours')
 const fives = document.querySelector('#fives')
 const sixes = document.querySelector('#sixes')
 const subTotal = document.querySelector('#subTotal')
-const bonus = document.querySelector('#bonus')
+const subBonus = document.querySelector('#subBonus')
 const triple = document.querySelector('#triple')
 const quad = document.querySelector('#quad')
 const fullHouse = document.querySelector('#fullHouse')
@@ -95,7 +95,21 @@ function rollDice() {
     updateValueFreq()
     displayOptions()
 }
+
 //function to animate dice rolling?
+
+//update dice appearance based on array of number values
+function updateDisplay() {
+    dice.forEach((die) => {
+        let index = parseInt(die.getAttribute('id'))
+        die.innerText = diceValues[index]
+        if (diceLocked[index] == true) {
+            die.classList.add('dieLocked')
+        } else {
+            die.classList.remove('dieLocked')
+        }
+    })
+}
 
 function updateValueFreq() {
     valueFreq = [0,0,0,0,0,0]
@@ -156,25 +170,13 @@ function lockDie(die) {
     // console.log('Clicked die ID:', diceLocked);
 }
 
-//update dice appearance based on array of number values
-function updateDisplay() {
-    dice.forEach((die) => {
-        let index = parseInt(die.getAttribute('id'))
-        die.innerText = diceValues[index]
-        if (diceLocked[index] == true) {
-            die.classList.add('dieLocked')
-        } else {
-            die.classList.remove('dieLocked')
-        }
-    })
-}
 
-// select single pattern and update score
+// select single combo and update score
 function lockScore() {
     // when you click an unlocked score, it locks it and resets unlocked scores
 
     if (event.target.classList.contains('scoreLocked')) {return}
-    resetDice()
+    
     // console.log(event.target.id)
 
     event.target.classList.add("scoreLocked")
@@ -236,11 +238,23 @@ function lockScore() {
     if (yahtzeeLock == false) {yahtzee.innerText = 0}
     if (chanceLock == false) {chance.innerText = 0}
 
+    updateBonuses()
+    resetDice()
 }
 
 function updateBonuses() {
+    // fives.innerText = 31
+    // sixes.innerText = 32
+    // if subtotal exceeds 63 or more, add 35 for subtotal bonus
+    console.log(parseInt(ones.innerText)+parseInt(twos.innerText)+parseInt(threes.innerText)+parseInt(fours.innerText)+parseInt(fives.innerText)+parseInt(sixes.innerText))
+    if (parseInt(ones.innerText)+parseInt(twos.innerText)+parseInt(threes.innerText)+parseInt(fours.innerText)+parseInt(fives.innerText)+parseInt(sixes.innerText) >= 63) {
+        subBonus.innerText = 35
+        subBonus.classList.add('bonus')
+    }
+    
+    // also if yahtzee has value of 50 already
+    // and if currently valueFreq contains 5
     // update yahtzee 100
-    // update 35 for subtotal 
 }
 
 
