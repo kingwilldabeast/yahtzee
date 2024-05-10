@@ -13,7 +13,7 @@ let foursLock = false
 let fivesLock = false
 let sixesLock = false
 
-let bonusEarned = false
+// let bonusEarned = false
 let yahtzeeBonusEarned = false
 
 let tripleLock = false
@@ -90,6 +90,7 @@ function rollDice() {
 
     // diceValues = [1,2,4,3, 5] //manually change for testing 
     // diceValues = [6,5,4,3, 2] //manually change for testing 
+    diceValues = [2,2,2,2,2] //manually change for testing 
     console.log(`five values are ${diceValues}`)
     updateDisplay()
     updateValueFreq()
@@ -178,8 +179,8 @@ function lockScore() {
     if (event.target.classList.contains('scoreLocked')) {return}
     
     // console.log(event.target.id)
-
     event.target.classList.add("scoreLocked")
+
     switch (event.target.id) {
         case 'ones':
         onesLock = true
@@ -244,9 +245,10 @@ function lockScore() {
 
 function updateBonuses() {
     // fives.innerText = 31
-    // sixes.innerText = 32
+    // yahtzee.innerText = 50
+
     // if subtotal exceeds 63 or more, add 35 for subtotal bonus
-    console.log(parseInt(ones.innerText)+parseInt(twos.innerText)+parseInt(threes.innerText)+parseInt(fours.innerText)+parseInt(fives.innerText)+parseInt(sixes.innerText))
+    // console.log(parseInt(ones.innerText)+parseInt(twos.innerText)+parseInt(threes.innerText)+parseInt(fours.innerText)+parseInt(fives.innerText)+parseInt(sixes.innerText))
     if (parseInt(ones.innerText)+parseInt(twos.innerText)+parseInt(threes.innerText)+parseInt(fours.innerText)+parseInt(fives.innerText)+parseInt(sixes.innerText) >= 63) {
         subBonus.innerText = 35
         subBonus.classList.add('bonus')
@@ -255,6 +257,16 @@ function updateBonuses() {
     // also if yahtzee has value of 50 already
     // and if currently valueFreq contains 5
     // update yahtzee 100
+    // console.log(valueFreq)
+    if (parseInt(yahtzee.innerText) == 50 && yahtzee.classList.contains('scoreLocked') && valueFreq.includes(5)) {
+        if (yahtzeeBonusEarned == false) {
+            yahtzeeBonusEarned = true 
+        } else {
+            yahtzeeBonus.innerText = parseInt(yahtzeeBonus.innerText) + 100
+            yahtzeeBonus.classList.add('bonus')
+        }
+        
+    }
 }
 
 
