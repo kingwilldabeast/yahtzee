@@ -4,7 +4,7 @@
 let diceValues 
 let diceLocked 
 let valueFreq //frequency of values 1-6
-let sum
+// let sum
 
 let onesLock = false
 let twosLock = false
@@ -15,6 +15,7 @@ let sixesLock = false
 
 // let bonusEarned = false
 let yahtzeeBonusEarned = false
+let lockedCombos = 0
 
 let tripleLock = false
 let quadLock = false
@@ -27,6 +28,7 @@ let chanceLock = false
 /*------------------------ Cached Element References ------------------------*/
 const dice = document.querySelectorAll('.dice')
 const roll = document.querySelector('#roll')
+const reset = document.querySelector('#reset')
 const scores = document.querySelectorAll('.scores')
 
 const ones = document.querySelector('#ones')
@@ -50,19 +52,32 @@ const total = document.querySelector('#total')
 /*-------------------------------- Functions --------------------------------*/
 
 //initialize on load
-function init() {
+function resetGame() {
     diceValues = [0, 0, 0, 0, 0] 
     diceLocked = [false, false, false, false, false]
     valueFreq = [0,0,0,0,0,0]
-    console.log( `board loaded`)
+    // sum = 0
+    // console.log( `board loaded`)
+
+    scores.forEach((score) => {
+        score.classList.remove('scoreLocked')
+        score.innerText = 0
+    })
+    subBonus.classList.remove('bonus')
+    subBonus.innerText = 0
+    yahtzeeBonus.classList.remove('bonus')
+    yahtzeeBonus.innerText = 0
+    total.innerText = 0
+
+    yahtzeeBonusEarned = false
+    lockedCombos = 0
+
     onesLock = false
     twosLock = false
     threesLock = false
     foursLock = false
     fivesLock = false
     sixesLock = false
-
-    bonusEarned = false
 
     tripleLock = false
     quadLock = false
@@ -76,6 +91,7 @@ function init() {
 
 // roll all unlocked dice by generating 1-6 random
 function rollDice() {
+    if (lockedCombos >= 13) {return}
     for (let die = 0; die <= 4; die++) {
         if (diceLocked[die] == false) {
             let value = Math.ceil(Math.random()*6)
@@ -90,7 +106,7 @@ function rollDice() {
 
     // diceValues = [1,2,4,3, 5] //manually change for testing 
     // diceValues = [6,5,4,3, 2] //manually change for testing 
-    diceValues = [2,2,2,2,2] //manually change for testing 
+    // diceValues = [2,2,2,2,2] //manually change for testing 
     console.log(`five values are ${diceValues}`)
     updateDisplay()
     updateValueFreq()
@@ -180,6 +196,7 @@ function lockScore() {
     
     // console.log(event.target.id)
     event.target.classList.add("scoreLocked")
+    lockedCombos++
 
     switch (event.target.id) {
         case 'ones':
@@ -240,11 +257,13 @@ function lockScore() {
     if (chanceLock == false) {chance.innerText = 0}
 
     updateBonuses()
+    updateTotal()
+    checkGameOver()
     resetDice()
 }
 
 function updateBonuses() {
-    // fives.innerText = 31
+    // fives.innerText = 60
     // yahtzee.innerText = 50
 
     // if subtotal exceeds 63 or more, add 35 for subtotal bonus
@@ -269,6 +288,16 @@ function updateBonuses() {
     }
 }
 
+function updateTotal(){
+    let sum = 0
+    scores.forEach((score) => {
+        sum += parseInt(score.innerText)
+    })
+    sum += parseInt(subBonus.innerText)
+    sum += parseInt(yahtzeeBonus.innerText)
+    total.innerText = sum
+    
+}
 
 // reset dice when select a combo
 function resetDice() {
@@ -278,12 +307,16 @@ function resetDice() {
 }
 
 // game ends after all 13 patterns have been selected
+function checkGameOver() {
+    if (lockedCombos >= 13) {
+        window.alert("Game Over! Your score is something");
+    }
+}
 
-// if yahtzee is rolled after false yahtzee is selected, no bonus 
+// if yahtzee is rolled after false yahtzee is selected, alert taunting them
 
-// if yahtzee is rolled after true yahtzee is selected, give bonus of 100 
 
-// reset all scores and dice at end of game 
+
 
 
 
@@ -291,9 +324,11 @@ function resetDice() {
 
 /*----------------------------- Event Listeners -----------------------------*/
 
-document.querySelector('body').addEventListener("load", init());
+document.querySelector('body').addEventListener("load", resetGame());
 
 roll.addEventListener('click', rollDice)
+
+reset.addEventListener('click', resetGame)
 
 dice.forEach(function(die) {
     die.addEventListener('click', function() {    
