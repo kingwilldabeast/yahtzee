@@ -1,15 +1,37 @@
 /*-------------------------------- Constants --------------------------------*/
-const diceValues = [0, 0, 0, 0, 0,]
-const diceLocked = [false, false, false, false, false]
+let diceValues 
+let diceLocked 
 /*---------------------------- Variables (state) ----------------------------*/
 
 
 /*------------------------ Cached Element References ------------------------*/
 const dice = document.querySelectorAll('.dice')
 const roll = document.querySelector('#roll')
+const ones = document.querySelector('#ones')
+const twos = document.querySelector('#twos')
+const threes = document.querySelector('#threes')
+const fours = document.querySelector('#fours')
+const fives = document.querySelector('#fives')
+const sixes = document.querySelector('#sixes')
+const subTotal = document.querySelector('#subTotal')
+const bonus = document.querySelector('#bonus')
+const triple = document.querySelector('#triple')
+const quad = document.querySelector('#quad')
+const fullHouse = document.querySelector('#fullHouse')
+const smallStraight = document.querySelector('#smallStraight')
+const largeStraight = document.querySelector('#largeStraight')
+const yahtzee = document.querySelector('#yahtzee')
+const yahtzeeBonus = document.querySelector('#yahtzeeBonus')
+const total = document.querySelector('#total')
 
 /*-------------------------------- Functions --------------------------------*/
 
+//initialize on load
+function init() {
+    diceValues = [0, 0, 0, 0, 0,]
+    diceLocked = [false, false, false, false, false]
+
+}
 
 // roll all unlocked dice by generating 1-6 random
 function rollDice() {
@@ -29,25 +51,32 @@ function rollDice() {
 // calculate potential scores for eligible patterns based on dice values
 
 // lock or unlock an individual die
-
 function lockDie(die) {
-        // const dieID = event.target.id;
-        // die.innerText = true
+
         let index = parseInt(die.getAttribute('id'))
         diceLocked[index] == true ? diceLocked[index] = false : diceLocked[index] = true
-        // switch (value) {
-        //     case 'die1': 
-        //     diceLocked[1] = true;
-        //     break;
-        // }
+
         console.log('Clicked die ID:', diceLocked);
 }
 
+function updateDice() {
+    //update dice appearance based on array of number values??
+}
+
 // select single pattern and update score
+function updateScores() {
+
+}
 
 // reset potential scores of unselected patterns
 
+// calculate and log bonus of 35, if subtotal >= 63
+
 // reset dice at beginning of new turn
+function resetDice() {
+    diceValues = [0, 0, 0, 0, 0,]
+    diceLocked = [false, false, false, false, false]
+}
 
 // game ends after all 13 patterns have been selected
 
