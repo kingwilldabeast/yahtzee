@@ -81,7 +81,13 @@ function rollDice() {
             diceValues[die] = value
         }
     }
-    diceValues = [4,4,5,5, 5] //manually change for testing 
+    // diceValues = [4,4,5,5, 5] //manually change for testing 
+    // diceValues = [1,2,4,3, 2] //manually change for testing 
+    // diceValues = [5,2,4,3, 2] //manually change for testing 
+    // diceValues = [6,6,4,3, 5] //manually change for testing 
+
+    // diceValues = [1,2,4,3, 5] //manually change for testing 
+    // diceValues = [6,5,4,3, 2] //manually change for testing 
     console.log(`five values are ${diceValues}`)
     updateDisplay()
     updateValueFreq()
@@ -127,10 +133,16 @@ function displayOptions() {
     if (fullHouseLock == false && valueFreq.includes(2,3)) {fullHouse.innerText = 25}
     if (chanceLock == false) {chance.innerText = sum}
 
-    if (smallStraightLock == false) {smallStraight.innerText = 30}
+    //small straight
+    if (valueFreq[0] >= 1 && valueFreq[1] >= 1 && valueFreq[2] >= 1 && valueFreq[3] >= 1 || valueFreq[1] >= 1 && valueFreq[2] >= 1 && valueFreq[3] >= 1 && valueFreq[4] >= 1 || valueFreq[2] >= 1 && valueFreq[3] >= 1 && valueFreq[4] >= 1 && valueFreq[5] >= 1) {
+        if (smallStraightLock == false) {smallStraight.innerText = 30}
+    }
     
-    if (largeStraightLock == false) {largeStraight.innerText = 40}
-    
+    //large straight
+    if (valueFreq[0] >= 1 && valueFreq[1] >= 1 && valueFreq[2] >= 1 && valueFreq[3] >= 1 && valueFreq[4] >= 1 || valueFreq[1] >= 1 && valueFreq[2] >= 1 && valueFreq[3] >= 1 && valueFreq[4] >= 1 && valueFreq[5] >= 1) {
+        if (smallStraightLock == false) {smallStraight.innerText = 30}
+        if (largeStraightLock == false) {largeStraight.innerText = 40}
+    }
 
 }
 
