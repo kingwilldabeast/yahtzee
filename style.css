@@ -1,0 +1,7 @@
+.scores {
+    border: 1px solid lightgray;
+}
+
+.scoreLocked {
+    border: 1px solid darkgreen;
+}

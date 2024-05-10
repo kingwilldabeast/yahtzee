@@ -14,6 +14,7 @@ let fivesLock = false
 let sixesLock = false
 
 let bonusEarned = false
+let yahtzeeBonusEarned = false
 
 let tripleLock = false
 let quadLock = false
@@ -26,6 +27,7 @@ let chanceLock = false
 /*------------------------ Cached Element References ------------------------*/
 const dice = document.querySelectorAll('.dice')
 const roll = document.querySelector('#roll')
+const scores = document.querySelectorAll('.scores')
 
 const ones = document.querySelector('#ones')
 const twos = document.querySelector('#twos')
@@ -81,7 +83,7 @@ function rollDice() {
             diceValues[die] = value
         }
     }
-    // diceValues = [4,4,5,5, 5] //manually change for testing 
+    // diceValues = [3,3,6,6,6] //manually change for testing 
     // diceValues = [1,2,4,3, 2] //manually change for testing 
     // diceValues = [5,2,4,3, 2] //manually change for testing 
     // diceValues = [6,6,4,3, 5] //manually change for testing 
@@ -130,7 +132,7 @@ function displayOptions() {
     if (tripleLock == false && (valueFreq.includes(3) || valueFreq.includes(4) || valueFreq.includes(5))) {triple.innerText = sum}
     if (quadLock == false && (valueFreq.includes(4) || valueFreq.includes(5))) {quad.innerText = sum}
     if (yahtzeeLock == false && valueFreq.includes(5)) {yahtzee.innerText = 50}
-    if (fullHouseLock == false && valueFreq.includes(2,3)) {fullHouse.innerText = 25}
+    if (fullHouseLock == false && valueFreq.includes(2) && valueFreq.includes(3)) {fullHouse.innerText = 25}
     if (chanceLock == false) {chance.innerText = sum}
 
     //small straight
@@ -163,12 +165,73 @@ function updateDisplay() {
     })
 }
 
-
-
-
 // select single pattern and update score
-function updateScores() {
-    // when you click a score, it preserves and locks it, and sets other unlocked to zero
+function lockScore() {
+    // when you click an unlocked score, it locks it and resets unlocked scores
+
+    if (event.target.classList.contains('scoreLocked')) {return}
+    resetDice()
+    // console.log(event.target.id)
+
+    event.target.classList.add("scoreLocked")
+    switch (event.target.id) {
+        case 'ones':
+        onesLock = true
+        break
+        case 'twos':
+        twosLock = true
+        break
+        case 'threes':
+        threesLock = true
+        break
+        case 'fours':
+        foursLock = true
+        break
+        case 'fives':
+        fivesLock = true
+        break
+        case 'sixes':
+        sixesLock = true
+        break
+        case 'triple':
+        tripleLock = true
+        break
+        case 'quad':
+        quadLock = true
+        break
+        case 'fullHouse':
+        fullHouseLock = true
+        break
+        case 'smallStraight':
+        smallStraightLock = true
+        break
+        case 'largeStraight':
+        largeStraightLock = true
+        break
+        case 'yahtzee':
+        yahtzeeLock = true
+        break
+        case 'chance':
+        chanceLock = true
+        break
+    }
+    
+    //reset the rest that are not locked 
+    if (onesLock == false) {ones.innerText = 0}
+    if (twosLock == false) {twos.innerText = 0}
+    if (threesLock == false) {threes.innerText = 0}
+    if (foursLock == false) {fours.innerText = 0}
+    if (fivesLock == false) {fives.innerText = 0}
+    if (sixesLock == false) {sixes.innerText = 0}
+    
+    if (tripleLock == false) {triple.innerText = 0}
+    if (quadLock == false) {quad.innerText = 0}
+    if (fullHouseLock == false) {fullHouse.innerText = 0}
+    if (smallStraightLock == false) {smallStraight.innerText = 0}
+    if (largeStraightLock == false) {largeStraight.innerText = 0}
+    if (yahtzeeLock == false) {yahtzee.innerText = 0}
+    if (chanceLock == false) {chance.innerText = 0}
+
 }
 
 function updateBonuses() {
@@ -176,14 +239,12 @@ function updateBonuses() {
     // update 35 for subtotal 
 }
 
-// reset potential scores of unselected patterns
 
-// calculate and log bonus of 35, if subtotal >= 63
-
-// reset dice at beginning of new turn
+// reset dice when select a combo
 function resetDice() {
     diceValues = [0, 0, 0, 0, 0,]
     diceLocked = [false, false, false, false, false]
+    updateDisplay()
 }
 
 // game ends after all 13 patterns have been selected
@@ -205,5 +266,13 @@ document.querySelector('body').addEventListener("load", init());
 roll.addEventListener('click', rollDice)
 
 dice.forEach(function(die) {
-    die.addEventListener('click', function() {    lockDie(die)  }  );
+    die.addEventListener('click', function() {    
+        lockDie(die)  
+    });
+});
+
+scores.forEach(function(score) {
+    score.addEventListener("click", function() {
+        lockScore()
+    });
 });
