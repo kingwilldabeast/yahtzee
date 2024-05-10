@@ -4,7 +4,7 @@
 let diceValues 
 let diceLocked 
 let valueFreq //frequency of values 1-6
-// let sum
+let rolls
 
 let onesLock = false
 let twosLock = false
@@ -69,6 +69,7 @@ function resetGame() {
     yahtzeeBonus.innerText = 0
     total.innerText = 0
 
+    rolls = 0
     yahtzeeBonusEarned = false
     lockedCombos = 0
 
@@ -91,7 +92,8 @@ function resetGame() {
 
 // roll all unlocked dice by generating 1-6 random
 function rollDice() {
-    if (lockedCombos >= 13) {return}
+    if (lockedCombos >= 13 || rolls >=3) {return}
+    rolls++
     for (let die = 0; die <= 4; die++) {
         if (diceLocked[die] == false) {
             let value = Math.ceil(Math.random()*6)
@@ -107,10 +109,12 @@ function rollDice() {
     // diceValues = [1,2,4,3, 5] //manually change for testing 
     // diceValues = [6,5,4,3, 2] //manually change for testing 
     // diceValues = [2,2,2,2,2] //manually change for testing 
-    console.log(`five values are ${diceValues}`)
+    // console.log(`five values are ${diceValues}`)
+
     updateDisplay()
     updateValueFreq()
     displayOptions()
+
 }
 
 //function to animate dice rolling?
@@ -197,6 +201,7 @@ function lockScore() {
     // console.log(event.target.id)
     event.target.classList.add("scoreLocked")
     lockedCombos++
+    rolls = 0
 
     switch (event.target.id) {
         case 'ones':
@@ -309,7 +314,7 @@ function resetDice() {
 // game ends after all 13 patterns have been selected
 function checkGameOver() {
     if (lockedCombos >= 13) {
-        window.alert("Game Over! Your score is something");
+        window.alert("Game Over!");
     }
 }
 
