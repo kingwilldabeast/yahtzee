@@ -1,5 +1,6 @@
 /*-------------------------------- Constants --------------------------------*/
 const diceValues = [0, 0, 0, 0, 0,]
+const diceLocked = [false, false, false, false, false]
 /*---------------------------- Variables (state) ----------------------------*/
 
 
@@ -13,10 +14,13 @@ const roll = document.querySelector('#roll')
 // roll all unlocked dice by generating 1-6 random
 function rollDice() {
     dice.forEach((die) => {
-        let value = Math.ceil(Math.random()*6)
-        console.log(value)
-        diceValues[die] = value
-        die.innerText = value
+        let index = parseInt(die.getAttribute('id'))
+        if (diceLocked[index] == false) {
+            let value = Math.ceil(Math.random()*6)
+            console.log(value)
+            diceValues[die] = value
+            die.innerText = value
+        }
     })
     
 }
@@ -25,6 +29,19 @@ function rollDice() {
 // calculate potential scores for eligible patterns based on dice values
 
 // lock or unlock an individual die
+
+function lockDie(die) {
+        // const dieID = event.target.id;
+        // die.innerText = true
+        let index = parseInt(die.getAttribute('id'))
+        diceLocked[index] == true ? diceLocked[index] = false : diceLocked[index] = true
+        // switch (value) {
+        //     case 'die1': 
+        //     diceLocked[1] = true;
+        //     break;
+        // }
+        console.log('Clicked die ID:', diceLocked);
+}
 
 // select single pattern and update score
 
@@ -47,3 +64,6 @@ function rollDice() {
 /*----------------------------- Event Listeners -----------------------------*/
 
 roll.addEventListener('click', rollDice)
+dice.forEach(function(die) {
+    die.addEventListener('click', function() {    lockDie(die)  }  );
+});
