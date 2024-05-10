@@ -5,16 +5,16 @@ a game of Yahtzee with five dice
 
 ## Description
 
-Yahtzee is a dice game played by rolling five dice and trying to roll certain combinations. It can be played with friends or by oneself.
+Yahtzee is a dice game played by rolling five dice and trying to roll certain combinations. It was popular during the war. It can be played with friends (if you have friends) or by oneself.
 
 ## How To Get Started
 
 1. To begin a new game, click **Roll** button
-2. After the dice roll, click individual dice to lock their values.
-3. Roll the unlocked dice up to two more times.
-4. Afte the third roll, you must select a pattern that has not yet been selected.
-5. Once all 13 patterns have been selected, the game is over.
-6. The first **yahtzee** is 50 points, and every additional yahtzee is 100 points.
+2. After the dice roll, click individual dice to **lock** their values.
+3. Roll the unlocked dice **one or two** more times.
+4. By the **third** roll, you must select and lock a pattern that has not yet been selected.
+5. Once **all 13** patterns have been locked, the game is over.
+6. If a pattern is selected but the dice do not fit that pattern, that pattern will be locked at **0 points**.
 
 The patterns and scores are as follows.
 
@@ -30,5 +30,7 @@ The patterns and scores are as follows.
 - Small Straight: 30 points, but only if you have four values in a row
 - Large Straight: 40 points, but only if you have five values in a row
 - Yahtzee: 50 points, but only if you have five of a kind
+- Every additional Yahtzee: 100 points bonus, automatically added
 - Chance: sum of dice total
 
+![image of wireframe](mockup.png)
