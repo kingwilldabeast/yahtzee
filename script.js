@@ -1,8 +1,8 @@
 /*-------------------------------- Constants --------------------------------*/
+/*---------------------------- Variables (state) ----------------------------*/
 let diceValues 
 let diceLocked 
-/*---------------------------- Variables (state) ----------------------------*/
-
+let valueFreq //frequency of values 1-6
 
 /*------------------------ Cached Element References ------------------------*/
 const dice = document.querySelectorAll('.dice')
@@ -30,7 +30,8 @@ const total = document.querySelector('#total')
 function init() {
     diceValues = [0, 0, 0, 0, 0,]
     diceLocked = [false, false, false, false, false]
-
+    valueFreq = [0,0,0,0,0,0]
+    console.log( `board loaded`)
 }
 
 // roll all unlocked dice by generating 1-6 random
@@ -39,16 +40,41 @@ function rollDice() {
         let index = parseInt(die.getAttribute('id'))
         if (diceLocked[index] == false) {
             let value = Math.ceil(Math.random()*6)
-            console.log(value)
-            diceValues[die] = value
+            // console.log(value)
+            diceValues[index] = value
             die.innerText = value
         }
     })
-    
+    console.log(`five values are ${diceValues}`)
+    updateValueFreq()
 }
 //function to animate dice rolling?
 
+function updateValueFreq() {
+    valueFreq = [0,0,0,0,0,0]
+    diceValues.forEach((die) => {
+       if (die == 1) {
+          valueFreq[0]++
+        } else if (die == 2) {
+          valueFreq[1]++;
+        } else if (die == 3) {
+          valueFreq[2]++;
+        } else if (die == 4) {
+          valueFreq[3]++;
+        } else if (die == 5) {
+          valueFreq[4]++;
+        } else if (die == 6) {
+          valueFreq[5]++;
+        }  
+    })
+        console.log(`distribution of values is ${valueFreq}`)
+    
+}
+
 // calculate potential scores for eligible patterns based on dice values
+function displayOptions() {
+    
+}
 
 // lock or unlock an individual die
 function lockDie(die) {
@@ -56,12 +82,15 @@ function lockDie(die) {
         let index = parseInt(die.getAttribute('id'))
         diceLocked[index] == true ? diceLocked[index] = false : diceLocked[index] = true
 
-        console.log('Clicked die ID:', diceLocked);
+        // console.log('Clicked die ID:', diceLocked);
 }
 
 function updateDice() {
     //update dice appearance based on array of number values??
 }
+
+
+
 
 // select single pattern and update score
 function updateScores() {
@@ -92,7 +121,10 @@ function resetDice() {
 
 /*----------------------------- Event Listeners -----------------------------*/
 
+document.querySelector('body').addEventListener("load", init());
+
 roll.addEventListener('click', rollDice)
+
 dice.forEach(function(die) {
     die.addEventListener('click', function() {    lockDie(die)  }  );
 });
