@@ -30,6 +30,7 @@ const dice = document.querySelectorAll('.dice')
 const roll = document.querySelector('#roll')
 const reset = document.querySelector('#reset')
 const scores = document.querySelectorAll('.scores')
+const scoresRow = document.querySelectorAll('.scoreRowClickable')
 
 const ones = document.querySelector('#ones')
 const twos = document.querySelector('#twos')
@@ -49,23 +50,46 @@ const yahtzeeBonus = document.querySelector('#yahtzeeBonus')
 const chance = document.querySelector('#chance')
 const total = document.querySelector('#total')
 
+const onesRow = document.querySelector('#onesRow')
+const twosRow = document.querySelector('#twosRow')
+const threesRow = document.querySelector('#threesRow')
+const foursRow = document.querySelector('#foursRow')
+const fivesRow = document.querySelector('#fivesRow')
+const sixesRow = document.querySelector('#sixesRow')
+const subTotalRow = document.querySelector('#subTotalRow')
+const subBonusRow = document.querySelector('#subBonusRow')
+const tripleRow = document.querySelector('#tripleRow')
+const quadRow = document.querySelector('#quadRow')
+const fullHouseRow = document.querySelector('#fullHouseRow')
+const smallStraightRow = document.querySelector('#smallStraightRow')
+const largeStraightRow = document.querySelector('#largeStraightRow')
+const yahtzeeRow = document.querySelector('#yahtzeeRow')
+const yahtzeeBonusRow = document.querySelector('#yahtzeeBonusRow')
+const chanceRow = document.querySelector('#chanceRow')
+const totalRow = document.querySelector('#totalRow')
+
+
+
 /*-------------------------------- Functions --------------------------------*/
 
 //initialize on load
 function resetGame() {
-    diceValues = [0, 0, 0, 0, 0] 
-    diceLocked = [false, false, false, false, false]
+    resetDice()
     valueFreq = [0,0,0,0,0,0]
     // sum = 0
     // console.log( `board loaded`)
 
     scores.forEach((score) => {
-        score.classList.remove('scoreLocked')
+        // score.classList.remove('scoreLocked')
         score.innerText = 0
     })
-    subBonus.classList.remove('bonus')
+    scoresRow.forEach((scoreRow) => {
+        scoreRow.classList.remove('scoreLocked')
+        // scoreRow.innerText = 0
+    })
+    subBonusRow.classList.remove('bonus')
     subBonus.innerText = 0
-    yahtzeeBonus.classList.remove('bonus')
+    yahtzeeBonusRow.classList.remove('bonus')
     yahtzeeBonus.innerText = 0
     total.innerText = 0
 
@@ -204,43 +228,43 @@ function lockScore() {
     rolls = 0
 
     switch (event.target.id) {
-        case 'ones':
+        case 'onesRow':
         onesLock = true
         break
-        case 'twos':
+        case 'twosRow':
         twosLock = true
         break
-        case 'threes':
+        case 'threesRow':
         threesLock = true
         break
-        case 'fours':
+        case 'foursRow':
         foursLock = true
         break
-        case 'fives':
+        case 'fivesRow':
         fivesLock = true
         break
-        case 'sixes':
+        case 'sixesRow':
         sixesLock = true
         break
-        case 'triple':
+        case 'tripleRow':
         tripleLock = true
         break
-        case 'quad':
+        case 'quadRow':
         quadLock = true
         break
-        case 'fullHouse':
+        case 'fullHouseRow':
         fullHouseLock = true
         break
-        case 'smallStraight':
+        case 'smallStraightRow':
         smallStraightLock = true
         break
-        case 'largeStraight':
+        case 'largeStraightRow':
         largeStraightLock = true
         break
-        case 'yahtzee':
+        case 'yahtzeeRow':
         yahtzeeLock = true
         break
-        case 'chance':
+        case 'chanceRow':
         chanceLock = true
         break
     }
@@ -275,19 +299,19 @@ function updateBonuses() {
     // console.log(parseInt(ones.innerText)+parseInt(twos.innerText)+parseInt(threes.innerText)+parseInt(fours.innerText)+parseInt(fives.innerText)+parseInt(sixes.innerText))
     if (parseInt(ones.innerText)+parseInt(twos.innerText)+parseInt(threes.innerText)+parseInt(fours.innerText)+parseInt(fives.innerText)+parseInt(sixes.innerText) >= 63) {
         subBonus.innerText = 35
-        subBonus.classList.add('bonus')
+        subBonusRow.classList.add('bonus')
     }
     
     // also if yahtzee has value of 50 already
     // and if currently valueFreq contains 5
     // update yahtzee 100
     // console.log(valueFreq)
-    if (parseInt(yahtzee.innerText) == 50 && yahtzee.classList.contains('scoreLocked') && valueFreq.includes(5)) {
+    if (parseInt(yahtzee.innerText) == 50 && yahtzeeRow.classList.contains('scoreLocked') && valueFreq.includes(5)) {
         if (yahtzeeBonusEarned == false) {
             yahtzeeBonusEarned = true 
         } else {
             yahtzeeBonus.innerText = parseInt(yahtzeeBonus.innerText) + 100
-            yahtzeeBonus.classList.add('bonus')
+            yahtzeeBonusRow.classList.add('bonus')
         }
         
     }
@@ -306,7 +330,7 @@ function updateTotal(){
 
 // reset dice when select a combo
 function resetDice() {
-    diceValues = [0, 0, 0, 0, 0,]
+    diceValues = [0,0,0,0,0]
     diceLocked = [false, false, false, false, false]
     updateDisplay()
 }
@@ -334,8 +358,8 @@ dice.forEach(function(die) {
     });
 });
 
-scores.forEach(function(score) {
-    score.addEventListener("click", function() {
+scoresRow.forEach(function(scoreRow) {
+    scoreRow.addEventListener("click", function() {
         lockScore()
     });
 });
