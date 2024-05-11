@@ -11,7 +11,7 @@ body {
 
 #game {
     background-color: bisque;
-    width: 500px;
+    width: 600px;
     display: flex;
     /* justify-content: start; */
     align-items: center;
@@ -29,6 +29,15 @@ body {
     /* position: absolute; */
     /* align-self: end; */
     /* justify-self: flex-end; */
+
+}
+
+.scoreRow {
+    border: 1px solid orange;
+    display: flex;
+    flex-direction: row;
+    width: 120px;
+
 
 }
 
