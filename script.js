@@ -118,6 +118,8 @@ function resetGame() {
 function rollDice() {
     if (lockedCombos >= 13 || rolls >=3) {return}
     rolls++
+    roll.innerText = `${3-rolls} rolls left`
+
     for (let die = 0; die <= 4; die++) {
         if (diceLocked[die] == false) {
             let value = Math.ceil(Math.random()*6)
@@ -147,7 +149,16 @@ function rollDice() {
 function updateDisplay() {
     dice.forEach((die) => {
         let index = parseInt(die.getAttribute('id'))
-        die.innerText = diceValues[index]
+        // die.innerText = diceValues[index]
+        if (diceValues[index] == 0) {
+            die.style.backgroundImage = ''
+        } else {
+        die.style.backgroundImage = "url(6dice.png)";
+        die.style.backgroundSize = "300px"
+        offset = (7 - diceValues[index]) % 6 * 51
+        die.style.backgroundPosition = offset + "px"
+        }
+        
         if (diceLocked[index] == true) {
             die.classList.add('dieLocked')
         } else {
@@ -226,6 +237,7 @@ function lockScore() {
     event.target.classList.add("scoreLocked")
     lockedCombos++
     rolls = 0
+    roll.innerText = `${3-rolls} rolls left`
 
     switch (event.target.id) {
         case 'onesRow':
