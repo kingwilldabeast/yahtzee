@@ -11,22 +11,24 @@
 
 <body>
 <div id="game">
-    <!-- button to roll -->
-    <button id="roll">Roll Dice</button>
-    <button id="reset">New Game</button>
-
-    <!-- six die cubes -->
-    <div id="diceRow"> 
-        <div id="0" class="dice">0</div>
-        <div id="1" class="dice">0</div>
-        <div id="2" class="dice">0</div>
-        <div id="3" class="dice">0</div>
-        <div id="4" class="dice">0</div>
+    <div id="gameColumn">
+        <!-- button to roll -->
+        <button id="roll">Roll Dice</button>
+        
+        <!-- six die cubes -->
+        <div id="diceRow"> 
+            <div id="0" class="dice">0</div>
+            <div id="1" class="dice">0</div>
+            <div id="2" class="dice">0</div>
+            <div id="3" class="dice">0</div>
+            <div id="4" class="dice">0</div>
+        </div>
+        <!-- button to reset -->
+        <button id="reset">New Game</button>
     </div>
     
-<br>
 <div id="scoreColumn">
-        <h3>scores</h3>
+        <h3>Scores</h3>
         <div id="onesRow" class="scoreRowClickable">
             <p>Ones:</p>
             <div id="ones" class="scores">0</div>
@@ -52,7 +54,7 @@
             <div id="sixes" class="scores">0</div>
         </div>
 
-        <div class="scoreRow">
+        <div id="subTotalRow" class="scoreRow">
             <p>Subtotal:</p>
             <div id="subTotal">0</div>
         </div>
