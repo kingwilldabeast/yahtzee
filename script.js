@@ -320,13 +320,6 @@ function checkGameOver() {
 
 // if yahtzee is rolled after false yahtzee is selected, alert taunting them
 
-
-
-
-
-
-
-
 /*----------------------------- Event Listeners -----------------------------*/
 
 document.querySelector('body').addEventListener("load", resetGame());

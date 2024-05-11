@@ -1,3 +1,37 @@
+
+body {
+    background-color: darkgreen;
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: center;
+    /* align-items: center;*/
+    /* align-content: center; */
+    /* justify-items: center; */
+}
+
+#game {
+    background-color: bisque;
+    width: 500px;
+    display: flex;
+    /* justify-content: start; */
+    align-items: center;
+    /* align-content: center; */
+    /* justify-items: center; */
+    /* display: flex; */
+    /* align-self: center; */
+    /* justify-self: center; */
+}
+
+#scoreColumn {
+    display: flex;
+    flex-direction: column;
+    width: 50px;
+    /* position: absolute; */
+    /* align-self: end; */
+    /* justify-self: flex-end; */
+
+}
+
 .scores {
     border: 1px solid lightgray;
 }
@@ -6,8 +40,21 @@
     border: 1px solid darkgreen;
 }
 
+.bonus {
+    border: 1px solid gold;
+}
+
+#diceRow {
+    display: flex;
+    flex-direction: row;
+}
+
 .dice {
+    /* display: flex; */
+
     border: 1px solid gray;
+    aspect-ratio: 1/1;
+    width: 50px;
 
 }
 
@@ -15,6 +62,3 @@
     border: 1px solid blue;
 }
 
-.bonus {
-    border: 1px solid gold;
-}
