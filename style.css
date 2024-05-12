@@ -50,7 +50,7 @@ body {
 .dice {
     /* display: flex; */
 
-    border: 1px solid gray;
+    border: 2px solid lightgray;
     background-color: white;
     border-radius: 10%;
     aspect-ratio: 1/1;
@@ -62,8 +62,8 @@ body {
 }
 
 .dieLocked {
-    border: 1px solid blue;
-    background-color: gray;
+    border: 2px solid darkgreen;
+    /* background-color: gray; */
 }
 
 #reset {
@@ -80,6 +80,7 @@ body {
     flex-direction: column;
     width: 50px;
     margin: 10px;
+    /* border: 2px solid black; */
 
      /* justify-content: start; */
      align-items: center;

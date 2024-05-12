@@ -30,6 +30,7 @@ const dice = document.querySelectorAll('.dice')
 const roll = document.querySelector('#roll')
 const reset = document.querySelector('#reset')
 const scores = document.querySelectorAll('.scores')
+const subScores = document.querySelectorAll('.subScores')
 const scoresRow = document.querySelectorAll('.scoreRowClickable')
 
 const ones = document.querySelector('#ones')
@@ -81,12 +82,13 @@ function resetGame() {
 
     scores.forEach((score) => {
         // score.classList.remove('scoreLocked')
-        score.innerText = 0
+        score.innerText = ''
     })
     scoresRow.forEach((scoreRow) => {
         scoreRow.classList.remove('scoreLocked')
         // scoreRow.innerText = 0
     })
+    subTotal.innerText = 0
     subBonusRow.classList.remove('bonus')
     subBonus.innerText = 0
     yahtzeeBonusRow.classList.remove('bonus')
@@ -94,6 +96,7 @@ function resetGame() {
     total.innerText = 0
 
     rolls = 0
+    roll.innerText = `${3-rolls} rolls left`
     yahtzeeBonusEarned = false
     lockedCombos = 0
 
@@ -216,13 +219,19 @@ function displayOptions() {
         if (largeStraightLock == false) {largeStraight.innerText = 40}
     }
 
+    scores.forEach((score) => {
+        if (score.innerText == 0) {
+            score.innerText = ''
+        }
+    })
+
 }
 
 // lock or unlock an individual die
 function lockDie(die) {
     let index = parseInt(die.getAttribute('id'))
     diceLocked[index] == true ? diceLocked[index] = false : diceLocked[index] = true
-    spin(die)
+    // spin(die)
     updateDisplay()
     // console.log('Clicked die ID:', diceLocked);
 }
@@ -238,14 +247,14 @@ function spinUnlockedDice() {
         }
     })
 }
-function spin(die) {
-    //add spinning animation
-    die.classList.add('spin-animation');
-    //stop animation 
-    setTimeout(() => {
-        die.classList.remove('spin-animation');
-    }, 1000);
-}
+// function spin(die) {
+//     //add spinning animation
+//     die.classList.add('spin-animation');
+//     //stop animation 
+//     setTimeout(() => {
+//         die.classList.remove('spin-animation');
+//     }, 1000);
+// }
 
 // select single combo and update score
 function lockScore(combo) {
@@ -302,20 +311,20 @@ function lockScore(combo) {
     }
     
     //reset the rest that are not locked 
-    if (onesLock == false) {ones.innerText = 0}
-    if (twosLock == false) {twos.innerText = 0}
-    if (threesLock == false) {threes.innerText = 0}
-    if (foursLock == false) {fours.innerText = 0}
-    if (fivesLock == false) {fives.innerText = 0}
-    if (sixesLock == false) {sixes.innerText = 0}
+    if (onesLock == false) {ones.innerText = ''}
+    if (twosLock == false) {twos.innerText = ''}
+    if (threesLock == false) {threes.innerText = ''}
+    if (foursLock == false) {fours.innerText = ''}
+    if (fivesLock == false) {fives.innerText = ''}
+    if (sixesLock == false) {sixes.innerText = ''}
     
-    if (tripleLock == false) {triple.innerText = 0}
-    if (quadLock == false) {quad.innerText = 0}
-    if (fullHouseLock == false) {fullHouse.innerText = 0}
-    if (smallStraightLock == false) {smallStraight.innerText = 0}
-    if (largeStraightLock == false) {largeStraight.innerText = 0}
-    if (yahtzeeLock == false) {yahtzee.innerText = 0}
-    if (chanceLock == false) {chance.innerText = 0}
+    if (tripleLock == false) {triple.innerText = ''}
+    if (quadLock == false) {quad.innerText = ''}
+    if (fullHouseLock == false) {fullHouse.innerText = ''}
+    if (smallStraightLock == false) {smallStraight.innerText = ''}
+    if (largeStraightLock == false) {largeStraight.innerText = ''}
+    if (yahtzeeLock == false) {yahtzee.innerText = ''}
+    if (chanceLock == false) {chance.innerText = ''}
 
     updateBonuses()
     updateTotal()
@@ -328,8 +337,17 @@ function updateBonuses() {
     // yahtzee.innerText = 50
 
     // if subtotal exceeds 63 or more, add 35 for subtotal bonus
-    // console.log(parseInt(ones.innerText)+parseInt(twos.innerText)+parseInt(threes.innerText)+parseInt(fours.innerText)+parseInt(fives.innerText)+parseInt(sixes.innerText))
-    if (parseInt(ones.innerText)+parseInt(twos.innerText)+parseInt(threes.innerText)+parseInt(fours.innerText)+parseInt(fives.innerText)+parseInt(sixes.innerText) >= 63) {
+    let sum = 0
+    subScores.forEach((score) => {
+        if (score.innerText != '' ) {
+            sum += parseInt(score.innerText)
+            // console.log(`sum is ${sum}`)
+        } 
+    })
+    // console.log(`sum is ${sum}`)
+    subTotal.innerText = sum
+    
+    if (sum >= 63) {
         subBonus.innerText = 35
         subBonusRow.classList.add('bonus')
     }
@@ -338,7 +356,7 @@ function updateBonuses() {
     // and if currently valueFreq contains 5
     // update yahtzee 100
     // console.log(valueFreq)
-    if (parseInt(yahtzee.innerText) == 50 && yahtzeeRow.classList.contains('scoreLocked') && valueFreq.includes(5)) {
+    if (yahtzee.innerText == '50' && yahtzeeRow.classList.contains('scoreLocked') && valueFreq.includes(5)) {
         if (yahtzeeBonusEarned == false) {
             yahtzeeBonusEarned = true 
         } else {
@@ -352,8 +370,12 @@ function updateBonuses() {
 function updateTotal(){
     let sum = 0
     scores.forEach((score) => {
-        sum += parseInt(score.innerText)
+        if (score.innerText != '' ) {
+            sum += parseInt(score.innerText)
+            // console.log(`sum is ${sum}`)
+        } 
     })
+    // console.log(`sum is ${sum}`)
     sum += parseInt(subBonus.innerText)
     sum += parseInt(yahtzeeBonus.innerText)
     total.innerText = sum
