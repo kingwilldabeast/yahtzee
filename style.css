@@ -144,8 +144,17 @@ h3 {
     }
   }
 
-/*--- makes an element pulse --- */
+.pulse {
+animation: 3s linear infinite blink;
+}
 
-  .pulse {
-    animation: 3s linear infinite blink;
-  }
+/*--- makes an element spin --- */
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.spin-animation {
+    animation:  1s ease-in-out spin; /* Adjust duration and timing function as needed */
+}

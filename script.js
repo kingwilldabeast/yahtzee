@@ -223,6 +223,12 @@ function lockDie(die) {
     let index = parseInt(die.getAttribute('id'))
     diceLocked[index] == true ? diceLocked[index] = false : diceLocked[index] = true
     updateDisplay()
+    //add spinning animation
+    die.classList.add('spin-animation');
+    //stop animation 
+    setTimeout(() => {
+        die.classList.remove('spin-animation');
+    }, 1000);
     // console.log('Clicked die ID:', diceLocked);
 }
 
