@@ -351,6 +351,7 @@ function resetDice() {
 function checkGameOver() {
     if (lockedCombos >= 13) {
         window.alert("Game Over!");
+        reset.classList.add('pulse')
     }
 }
 

@@ -38,6 +38,8 @@ body {
     color: white;
     width: 150px;
     height: 150px;
+    text-transform: uppercase;
+
 }
 
 #diceRow {
@@ -70,6 +72,7 @@ body {
     color: yellow;
     width: 100px;
     height: 50px;
+    text-transform: uppercase;
 }
 
 #scoreColumn {
@@ -129,4 +132,20 @@ h3 {
 }
 
 
+/*--- makes an element pulse --- */
+ @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+  
+    50% {
+      opacity: 0;
+    }
+  }
 
+/*--- makes an element pulse --- */
+
+  .pulse {
+    animation: 3s linear infinite blink;
+  }
