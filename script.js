@@ -137,7 +137,7 @@ function rollDice() {
 
     // diceValues = [1,2,4,3, 5] //manually change for testing 
     // diceValues = [6,5,4,3, 2] //manually change for testing 
-    // diceValues = [2,2,2,2,2] //manually change for testing 
+    diceValues = [4,4,4,4,4] //manually change for testing 
     // console.log(`five values are ${diceValues}`)
     spinUnlockedDice()
     updateDisplay()

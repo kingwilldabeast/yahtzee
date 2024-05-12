@@ -98,30 +98,37 @@ h3 {
     border: 2px solid darkgray;
     background-color: white;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
 
     /* flex-direction: row; */
     width: 130px;
     height: 25px;
+    padding: 0 5px;
+
 }
+/* p {
+    text-align: start;
+} */
 
 .scoreRowClickable {
     border: 1px solid lightgray;
     background-color: white;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
 
     /* flex-direction: row; */
     width: 130px;
     height: 25px;
+    padding: 0 5px;
 }
 
 .scores, #subTotal, #subBonus, #yahtzeeBonus, #total {
     /* border: 1px solid lightgray; */
     width: 20px;
     text-align: end;
+    /* padding-right: 5px; */
 }
 
 .scoreLocked {
@@ -129,7 +136,8 @@ h3 {
 }
 
 .bonus {
-    border: 1px solid gold;
+    border: 2px solid orange;
+    background-color: gold;
 }
 
 
