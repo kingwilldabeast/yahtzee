@@ -228,18 +228,18 @@ function lockDie(die) {
 
 
 // select single combo and update score
-function lockScore() {
+function lockScore(combo) {
     // when you click an unlocked score, it locks it and resets unlocked scores
-
-    if (event.target.classList.contains('scoreLocked')) {return}
+    // console.log()
+    if (combo.classList.contains('scoreLocked')) {return}
     
     // console.log(event.target.id)
-    event.target.classList.add("scoreLocked")
+    combo.classList.add("scoreLocked")
     lockedCombos++
     rolls = 0
     roll.innerText = `${3-rolls} rolls left`
 
-    switch (event.target.id) {
+    switch (combo.getAttribute('id')) {
         case 'onesRow':
         onesLock = true
         break
@@ -372,6 +372,6 @@ dice.forEach(function(die) {
 
 scoresRow.forEach(function(scoreRow) {
     scoreRow.addEventListener("click", function() {
-        lockScore()
+        lockScore(scoreRow)
     });
 });

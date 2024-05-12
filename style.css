@@ -115,7 +115,7 @@ h3 {
 }
 
 .scores, #subTotal, #subBonus, #yahtzeeBonus, #total {
-    border: 1px solid lightgray;
+    /* border: 1px solid lightgray; */
     width: 20px;
     text-align: end;
 }
