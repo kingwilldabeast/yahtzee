@@ -133,6 +133,7 @@ h3 {
 
 .scoreLocked {
     border: 1px solid darkgreen;
+    background-color: lightgray;
 }
 
 .bonus {
