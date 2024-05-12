@@ -136,7 +136,7 @@ function rollDice() {
     // diceValues = [6,5,4,3, 2] //manually change for testing 
     // diceValues = [2,2,2,2,2] //manually change for testing 
     // console.log(`five values are ${diceValues}`)
-
+    spinUnlockedDice()
     updateDisplay()
     updateValueFreq()
     displayOptions()
@@ -222,16 +222,30 @@ function displayOptions() {
 function lockDie(die) {
     let index = parseInt(die.getAttribute('id'))
     diceLocked[index] == true ? diceLocked[index] = false : diceLocked[index] = true
+    spin(die)
     updateDisplay()
+    // console.log('Clicked die ID:', diceLocked);
+}
+
+function spinUnlockedDice() {
+    dice.forEach((die) => {
+        if (!die.classList.contains('dieLocked')) {
+            die.classList.add('spin-animation');
+            //stop animation 
+            setTimeout(() => {
+                die.classList.remove('spin-animation');
+            }, 1000);
+        }
+    })
+}
+function spin(die) {
     //add spinning animation
     die.classList.add('spin-animation');
     //stop animation 
     setTimeout(() => {
         die.classList.remove('spin-animation');
     }, 1000);
-    // console.log('Clicked die ID:', diceLocked);
 }
-
 
 // select single combo and update score
 function lockScore(combo) {
