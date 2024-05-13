@@ -338,10 +338,10 @@ function lockScore(combo) {
 
     updateBonuses()
     updateTotal()
-    checkGameOver()
     resetDice()
     banner.className = ''
     message.innerHTML = ''
+    checkGameOver()
 }
 
 function updateBonuses() {
@@ -420,8 +420,10 @@ function resetDice() {
 // game ends after all 13 patterns have been selected
 function checkGameOver() {
     if (lockedCombos >= 13) {
-        banner.className = ''
-        banner.classList.add('yahtzeeNull')
+        console.log(banner.classList)
+        banner.classList.remove('yahtzee','yahtzeeNull')
+        banner.classList.add('gameOver')
+        console.log(banner.classList)
         message.innerHTML = `GAME OVER! SCORE IS ${total.innerText}`
         reset.classList.add('pulse')
     }
