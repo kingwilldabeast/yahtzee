@@ -142,6 +142,64 @@ h3 {
     background-color: gold;
 }
 
+.gameOver {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 8rem 6rem;
+    border-radius: 10%;
+    background-color: #0c4722;
+    text-align: center;
+    color: goldenrod;
+    z-index: 1;
+    opacity: 0.9;
+  }
+
+  .yahtzee {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 7rem 6rem;
+    border: 1px solid olive;
+    border-radius: 10%;
+    background-color: #f3f313;
+    text-align: center;
+    color: rgb(90, 54, 8);
+    z-index: 1;
+    opacity: 0.9;
+  }
+
+  /* .yahtzeeBonus {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 7rem 6rem;
+    border: 1px solid olive;
+    border-radius: 10%;
+    background-color: #f3f313;
+    text-align: center;
+    color: rgb(90, 54, 8);
+    z-index: 1;
+    opacity: 0.9;
+  } */
+
+  .yahtzeeNull {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 7rem 6rem;
+    border: 1px solid black;
+    border-radius: 10%;
+    background-color: #74746e;
+    text-align: center;
+    color: rgb(12, 9, 6);
+    z-index: 1;
+    opacity: 0.9;
+  }
 
 /*--- makes an element pulse --- */
  @keyframes blink {

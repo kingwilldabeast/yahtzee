@@ -30,6 +30,8 @@ let chanceLock = false
 // let currentImage = 1
 
 /*------------------------ Cached Element References ------------------------*/
+const banner = document.querySelector('#banner')
+const message = document.querySelector('#message')
 const dice = document.querySelectorAll('.dice')
 const roll = document.querySelector('#roll')
 const reset = document.querySelector('#reset')
@@ -103,6 +105,8 @@ function resetGame() {
     roll.innerText = `${3-rolls} rolls left`
     yahtzeeBonusEarned = false
     lockedCombos = 0
+    banner.className = ''
+    message.innerHTML = ''
     reset.classList.remove('pulse')
 
     onesLock = false
@@ -142,14 +146,14 @@ function rollDice() {
 
     // diceValues = [1,2,4,3, 5] //manually change for testing 
     // diceValues = [6,5,4,3, 2] //manually change for testing 
-    // diceValues = [4,4,4,4,4] //manually change for testing 
+    diceValues = [4,4,4,4,4] //manually change for testing 
     // console.log(`five values are ${diceValues}`)
     spinUnlockedDice()
     updateDisplay()
     updateValueFreq()
     setTimeout(() => {
         displayOptions()
-
+        yahtzeeBanner()
     }, 1000);
 
 }
@@ -336,6 +340,8 @@ function lockScore(combo) {
     updateTotal()
     checkGameOver()
     resetDice()
+    banner.className = ''
+    message.innerHTML = ''
 }
 
 function updateBonuses() {
@@ -365,12 +371,27 @@ function updateBonuses() {
     if (yahtzee.innerText == '50' && yahtzeeRow.classList.contains('scoreLocked') && valueFreq.includes(5)) {
         if (yahtzeeBonusEarned == false) {
             yahtzeeBonusEarned = true 
+
         } else {
             yahtzeeBonus.innerText = parseInt(yahtzeeBonus.innerText) + 100
             yahtzeeBonusRow.classList.add('bonus')
         }
         
     }
+}
+
+function yahtzeeBanner() {
+    if (yahtzee.innerText === '' && yahtzeeRow.classList.contains('scoreLocked') && valueFreq.includes(5)) {
+        banner.classList.add('yahtzeeNull')
+        message.innerHTML = 'You rolled a Yahtzee but <BR> sadly cannot claim any points'
+    } else if (!yahtzeeRow.classList.contains('scoreLocked') && valueFreq.includes(5)) {
+        banner.classList.add('yahtzee')
+        message.innerHTML = 'CONGRATS! YOU ROLLED A <BR> YAHTZEE FOR 50 POINTS!'
+    } else if (yahtzee.innerText === '50' && yahtzeeRow.classList.contains('scoreLocked') && valueFreq.includes(5)) {
+        banner.classList.add('yahtzee')
+        message.innerHTML = 'CONGRATS! YOU ROLLED ANOTHER <BR> YAHTZEE FOR 100 POINTS BONUS!'
+    }
+
 }
 
 function updateTotal(){
@@ -392,18 +413,20 @@ function updateTotal(){
 function resetDice() {
     diceValues = [0,0,0,0,0]
     diceLocked = [false, false, false, false, false]
+    valueFreq = [0,0,0,0,0,0]
     updateDisplay()
 }
 
 // game ends after all 13 patterns have been selected
 function checkGameOver() {
     if (lockedCombos >= 13) {
-        window.alert("Game Over!");
+        banner.className = ''
+        banner.classList.add('yahtzeeNull')
+        message.innerHTML = `GAME OVER! SCORE IS ${total.innerText}`
         reset.classList.add('pulse')
     }
 }
 
-// if yahtzee is rolled after false yahtzee is selected, alert taunting them
 
 /*----------------------------- Event Listeners -----------------------------*/
 
