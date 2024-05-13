@@ -25,6 +25,10 @@ let largeStraightLock = false
 let yahtzeeLock = false
 let chanceLock = false
 
+// let finalNumber = 1
+// let rolling = false
+// let currentImage = 1
+
 /*------------------------ Cached Element References ------------------------*/
 const dice = document.querySelectorAll('.dice')
 const roll = document.querySelector('#roll')
@@ -99,6 +103,7 @@ function resetGame() {
     roll.innerText = `${3-rolls} rolls left`
     yahtzeeBonusEarned = false
     lockedCombos = 0
+    reset.classList.remove('pulse')
 
     onesLock = false
     twosLock = false
@@ -142,11 +147,13 @@ function rollDice() {
     spinUnlockedDice()
     updateDisplay()
     updateValueFreq()
-    displayOptions()
+    setTimeout(() => {
+        displayOptions()
+
+    }, 1000);
 
 }
 
-//function to animate dice rolling?
 
 //update dice appearance based on array of number values
 function updateDisplay() {
@@ -158,7 +165,7 @@ function updateDisplay() {
         } else {
         die.style.backgroundImage = "url(6dice.png)";
         die.style.backgroundSize = "300px"
-        offset = (7 - diceValues[index]) % 6 * 51
+        offset = diceValues[index] * 50
         die.style.backgroundPosition = offset + "px"
         }
         
@@ -169,6 +176,9 @@ function updateDisplay() {
         }
     })
 }
+
+
+
 
 function updateValueFreq() {
     valueFreq = [0,0,0,0,0,0]
@@ -239,22 +249,22 @@ function lockDie(die) {
 function spinUnlockedDice() {
     dice.forEach((die) => {
         if (!die.classList.contains('dieLocked')) {
-            die.classList.add('spin-animation');
-            //stop animation 
+            //start number cycling
+            die.classList.add('rolling');
+            //start spin
+            // die.classList.add('spin-animation');
+            //stop number cycling
             setTimeout(() => {
-                die.classList.remove('spin-animation');
+                die.classList.remove('rolling');
             }, 1000);
+            //stop spin 
+            // setTimeout(() => {
+            //     die.classList.remove('spin-animation');
+            // }, 1000);
         }
     })
 }
-// function spin(die) {
-//     //add spinning animation
-//     die.classList.add('spin-animation');
-//     //stop animation 
-//     setTimeout(() => {
-//         die.classList.remove('spin-animation');
-//     }, 1000);
-// }
+
 
 // select single combo and update score
 function lockScore(combo) {

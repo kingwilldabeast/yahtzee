@@ -58,6 +58,7 @@ body {
     display: flex;
     justify-content: center; 
     align-items: center; 
+    
 
 }
 
@@ -168,3 +169,18 @@ animation: 3s linear infinite blink;
 .spin-animation {
     animation:  1s ease-in-out spin; /* Adjust duration and timing function as needed */
 }
+
+/*--- makes an element cycle through dice numbers, from Chat GPT --- */
+
+@keyframes spriteAnimation {
+  0% { background-position: 0px 0px; }
+  100% { background-position: -300px 0px; }
+}
+
+.rolling {
+    width: 51px;
+    height: 51px;
+    background-image: url('https://i.imgur.com/QKttHBC.jpg');
+    animation: spriteAnimation 0.5s steps(6) infinite;
+  }
+  
