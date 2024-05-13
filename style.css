@@ -45,6 +45,7 @@ body {
 #diceRow {
     display: flex;
     flex-direction: row;
+    margin: 10px;
 }
 
 .dice {
@@ -69,7 +70,7 @@ body {
 
 #reset {
     background-color: black;
-    border-radius: 20%;
+    border-radius: 20px;
     color: yellow;
     width: 100px;
     height: 50px;
@@ -79,7 +80,7 @@ body {
 #scoreColumn {
     display: flex;
     flex-direction: column;
-    width: 50px;
+    /* width: 50px; */
     margin: 10px;
     /* border: 2px solid black; */
 
@@ -240,7 +241,13 @@ animation: 3s linear infinite blink;
 .rolling {
     width: 51px;
     height: 51px;
-    background-image: url('https://i.imgur.com/QKttHBC.jpg');
+    /* background-image: url('https://i.imgur.com/QKttHBC.jpg'); */
     animation: cycle 0.5s steps(6) infinite, spin 1s ease-in-out ; 
   }
   
+  @media screen and (max-width: 500px) {
+    #diceRow {
+        /* display: flex; */
+        flex-flow: row wrap;
+    }
+  }
