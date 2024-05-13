@@ -249,18 +249,14 @@ function lockDie(die) {
 function spinUnlockedDice() {
     dice.forEach((die) => {
         if (!die.classList.contains('dieLocked')) {
-            //start number cycling
+            //start animations
             die.classList.add('rolling');
-            //start spin
-            // die.classList.add('spin-animation');
-            //stop number cycling
+
+            //stop animations 
             setTimeout(() => {
                 die.classList.remove('rolling');
             }, 1000);
-            //stop spin 
-            // setTimeout(() => {
-            //     die.classList.remove('spin-animation');
-            // }, 1000);
+
         }
     })
 }

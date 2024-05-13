@@ -159,28 +159,30 @@ h3 {
 animation: 3s linear infinite blink;
 }
 
-/*--- makes an element spin --- */
+/*--- makes an element spin, from Chat GPT --- */
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
-.spin-animation {
-    animation:  1s ease-in-out spin; /* Adjust duration and timing function as needed */
-}
-
 /*--- makes an element cycle through dice numbers, from Chat GPT --- */
 
-@keyframes spriteAnimation {
-  0% { background-position: 0px 0px; }
-  100% { background-position: -300px 0px; }
+@keyframes cycle {
+  0% { 
+    background-position: 0px 0px; 
+    /* transform: rotate(0deg); */
+}
+  100% { 
+    background-position: -300px 0px; 
+    /* transform: rotate(360deg); */
+}
 }
 
 .rolling {
     width: 51px;
     height: 51px;
     background-image: url('https://i.imgur.com/QKttHBC.jpg');
-    animation: spriteAnimation 0.5s steps(6) infinite;
+    animation: cycle 0.5s steps(6) infinite, spin 1s ease-in-out ; 
   }
   
