@@ -244,6 +244,7 @@ function displayOptions() {
 // lock or unlock an individual die
 function lockDie(die) {
     let index = parseInt(die.getAttribute('id'))
+    if (diceValues[index] == 0) {return}
     diceLocked[index] == true ? diceLocked[index] = false : diceLocked[index] = true
     // spin(die)
     updateDisplay()
