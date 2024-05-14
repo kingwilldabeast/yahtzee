@@ -21,6 +21,8 @@ let smallStraightLock = false
 let largeStraightLock = false
 let yahtzeeLock = false
 let chanceLock = false
+let diceSound = new Audio('diceRoll.mp3') //Sound from Zapsplat.com
+
 
 /*------------------------ Cached Element References ------------------------*/
 const banner = document.querySelector('#banner')
@@ -224,6 +226,7 @@ function lockDie(die) {
 
 //start and stop spinning and number flashing
 function spinUnlockedDice() {
+    diceSound.play()
     dice.forEach((die) => {
         if (!die.classList.contains('dieLocked')) {
 
