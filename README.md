@@ -2,6 +2,7 @@
 a game of Yahtzee with five dice
 
 ![image of dice](dice.png)
+Image source: Getty Images
 
 ## Description
 

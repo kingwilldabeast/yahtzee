@@ -3,6 +3,8 @@ body {
     background-color: darkgreen;
     display: flex;
     justify-content: center;
+    font-family: "Play", sans-serif;
+    font-weight: 700;
 }
 
 #game {
@@ -27,10 +29,12 @@ body {
     border-radius: 20%;
     font-size: large;
     color: white;
+    font-family: "Press Start 2P", system-ui;
+    font-style: italic;
     width: 150px;
     height: 150px;
     text-transform: uppercase;
-
+    line-height: 30px;
 }
 
 #diceRow {
@@ -55,12 +59,14 @@ body {
 }
 
 #reset {
+    font-family: "Play", sans-serif;
+    font-weight: 700;
+    font-style: bold;
     background-color: black;
     border-radius: 20px;
     color: yellow;
     width: 100px;
     height: 50px;
-    text-transform: uppercase;
 }
 
 #scoreColumn {
@@ -77,7 +83,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 130px;
+    width: 140px;
     height: 25px;
     padding: 0 5px;
 
@@ -89,7 +95,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 130px;
+    width: 140px;
     height: 25px;
     padding: 0 5px;
 }

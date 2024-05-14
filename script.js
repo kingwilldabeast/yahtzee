@@ -93,7 +93,7 @@ function resetGame() {
     total.innerText = 0
 
     rolls = 0
-    roll.innerText = `${3-rolls} rolls left`
+    roll.innerHTML = `${3-rolls} <br> rolls left`
     lockedCombos = 0
     banner.className = ''
     message.innerHTML = ''
@@ -120,7 +120,7 @@ function resetGame() {
 function rollDice() {
     if (lockedCombos >= 13 || rolls >=3) {return}
     rolls++
-    roll.innerText = `${3-rolls} rolls left`
+    roll.innerHTML = `${3-rolls} <br> rolls left`
 
     for (let die = 0; die <= 4; die++) {
         if (diceLocked[die] == false) {
@@ -250,7 +250,7 @@ function lockScore(combo) {
     combo.classList.add("scoreLocked")
     lockedCombos++
     rolls = 0
-    roll.innerText = `${3-rolls} rolls left`
+    roll.innerHTML = `${3-rolls} <br> rolls left`
 
     switch (combo.getAttribute('id')) {
         case 'onesRow':
