@@ -2,11 +2,7 @@
 body {
     background-color: darkgreen;
     display: flex;
-    /* flex-direction: row; */
     justify-content: center;
-    /* align-items: center;*/
-    /* align-content: center; */
-    /* justify-items: center; */
 }
 
 #game {
@@ -16,11 +12,6 @@ body {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    /* align-content: center; */
-    /* justify-items: center; */
-    /* display: flex; */
-    /* align-self: center; */
-    /* justify-self: center; */
 }
 
 #gameColumn {
@@ -49,8 +40,6 @@ body {
 }
 
 .dice {
-    /* display: flex; */
-
     border: 2px solid lightgray;
     background-color: white;
     border-radius: 10%;
@@ -59,13 +48,10 @@ body {
     display: flex;
     justify-content: center; 
     align-items: center; 
-    
-
 }
 
 .dieLocked {
     border: 2px solid darkgreen;
-    /* background-color: gray; */
 }
 
 #reset {
@@ -80,38 +66,22 @@ body {
 #scoreColumn {
     display: flex;
     flex-direction: column;
-    /* width: 50px; */
     margin: 10px;
-    /* border: 2px solid black; */
-
-     /* justify-content: start; */
-     align-items: center;
-    /* position: absolute; */
-    /* align-self: end; */
-    /* justify-self: flex-end; */
+    align-items: center;
 
 }
 
-h3 {
-    /* display: flex;
-    text-align: center; */
-}
 .scoreRow {
     border: 2px solid darkgray;
     background-color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    /* flex-direction: row; */
     width: 130px;
     height: 25px;
     padding: 0 5px;
 
 }
-/* p {
-    text-align: start;
-} */
 
 .scoreRowClickable {
     border: 1px solid lightgray;
@@ -119,18 +89,14 @@ h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    /* flex-direction: row; */
     width: 130px;
     height: 25px;
     padding: 0 5px;
 }
 
 .scores, #subTotal, #subBonus, #yahtzeeBonus, #total {
-    /* border: 1px solid lightgray; */
     width: 20px;
     text-align: end;
-    /* padding-right: 5px; */
 }
 
 .scoreLocked {
@@ -172,21 +138,6 @@ h3 {
     opacity: 0.9;
   }
 
-  /* .yahtzeeBonus {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 7rem 6rem;
-    border: 1px solid olive;
-    border-radius: 10%;
-    background-color: #f3f313;
-    text-align: center;
-    color: rgb(90, 54, 8);
-    z-index: 1;
-    opacity: 0.9;
-  } */
-
   .yahtzeeNull {
     position: absolute;
     top: 30%;
@@ -215,39 +166,30 @@ h3 {
   }
 
 .pulse {
-animation: 3s linear infinite blink;
+    animation: 3s linear infinite blink;
 }
 
 /*--- makes an element spin, from Chat GPT --- */
-
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
 /*--- makes an element cycle through dice numbers, from Chat GPT --- */
-
 @keyframes cycle {
-  0% { 
-    background-position: 0px 0px; 
-    /* transform: rotate(0deg); */
-}
-  100% { 
-    background-position: -300px 0px; 
-    /* transform: rotate(360deg); */
-}
+    0% { background-position: 0px 0px; }
+    100% { background-position: -300px 0px; }
 }
 
 .rolling {
     width: 51px;
     height: 51px;
-    /* background-image: url('https://i.imgur.com/QKttHBC.jpg'); */
     animation: cycle 0.5s steps(6) infinite, spin 1s ease-in-out ; 
   }
   
   @media screen and (max-width: 500px) {
     #diceRow {
-        /* display: flex; */
+        display: flex;
         flex-flow: row wrap;
     }
   }

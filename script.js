@@ -5,6 +5,8 @@ let diceValues
 let diceLocked 
 let valueFreq //frequency of values 1-6
 let rolls
+let lockedCombos = 0
+let yahtzeeBonusEarned = false
 
 let onesLock = false
 let twosLock = false
@@ -12,11 +14,6 @@ let threesLock = false
 let foursLock = false
 let fivesLock = false
 let sixesLock = false
-
-// let bonusEarned = false
-let yahtzeeBonusEarned = false
-let lockedCombos = 0
-
 let tripleLock = false
 let quadLock = false
 let fullHouseLock = false
@@ -24,10 +21,6 @@ let smallStraightLock = false
 let largeStraightLock = false
 let yahtzeeLock = false
 let chanceLock = false
-
-// let finalNumber = 1
-// let rolling = false
-// let currentImage = 1
 
 /*------------------------ Cached Element References ------------------------*/
 const banner = document.querySelector('#banner')
@@ -75,35 +68,30 @@ const yahtzeeBonusRow = document.querySelector('#yahtzeeBonusRow')
 const chanceRow = document.querySelector('#chanceRow')
 const totalRow = document.querySelector('#totalRow')
 
-
-
 /*-------------------------------- Functions --------------------------------*/
 
 //initialize on load
 function resetGame() {
     resetDice()
-    valueFreq = [0,0,0,0,0,0]
-    // sum = 0
-    // console.log( `board loaded`)
 
     scores.forEach((score) => {
-        // score.classList.remove('scoreLocked')
         score.innerText = ''
     })
+
     scoresRow.forEach((scoreRow) => {
         scoreRow.classList.remove('scoreLocked')
-        // scoreRow.innerText = 0
     })
+
     subTotal.innerText = 0
     subBonusRow.classList.remove('bonus')
     subBonus.innerText = 0
     yahtzeeBonusRow.classList.remove('bonus')
     yahtzeeBonus.innerText = 0
+    yahtzeeBonusEarned = false
     total.innerText = 0
 
     rolls = 0
     roll.innerText = `${3-rolls} rolls left`
-    yahtzeeBonusEarned = false
     lockedCombos = 0
     banner.className = ''
     message.innerHTML = ''
@@ -139,15 +127,7 @@ function rollDice() {
             diceValues[die] = value
         }
     }
-    // diceValues = [3,3,6,6,6] //manually change for testing 
-    // diceValues = [1,2,4,3, 2] //manually change for testing 
-    // diceValues = [5,2,4,3, 2] //manually change for testing 
-    // diceValues = [6,6,4,3, 5] //manually change for testing 
 
-    // diceValues = [1,2,4,3, 5] //manually change for testing 
-    // diceValues = [6,5,4,3, 2] //manually change for testing 
-    // diceValues = [4,4,4,4,4] //manually change for testing 
-    // console.log(`five values are ${diceValues}`)
     spinUnlockedDice()
     updateDisplay()
     updateValueFreq()
@@ -155,15 +135,12 @@ function rollDice() {
         displayOptions()
         yahtzeeBanner()
     }, 1000);
-
 }
-
 
 //update dice appearance based on array of number values
 function updateDisplay() {
     dice.forEach((die) => {
         let index = parseInt(die.getAttribute('id'))
-        // die.innerText = diceValues[index]
         if (diceValues[index] == 0) {
             die.style.backgroundImage = ''
         } else {
@@ -181,9 +158,7 @@ function updateDisplay() {
     })
 }
 
-
-
-
+//calculates how often each value was rolled
 function updateValueFreq() {
     valueFreq = [0,0,0,0,0,0]
     diceValues.forEach((die) => {
@@ -200,12 +175,10 @@ function updateValueFreq() {
         } else if (die == 6) {
           valueFreq[5]++;
         }  
-    })
-        console.log(`distribution of values is ${valueFreq}`)
-    
+    })    
 }
 
-// calculate potential scores for eligible patterns based on dice values
+// calculate potential scores for eligible combos based on dice values
 function displayOptions() {
     let sum = diceValues[0] + diceValues[1] + diceValues[2] + diceValues[3] + diceValues[4]
 
@@ -246,14 +219,14 @@ function lockDie(die) {
     let index = parseInt(die.getAttribute('id'))
     if (diceValues[index] == 0) {return}
     diceLocked[index] == true ? diceLocked[index] = false : diceLocked[index] = true
-    // spin(die)
     updateDisplay()
-    // console.log('Clicked die ID:', diceLocked);
 }
 
+//start and stop spinning and number flashing
 function spinUnlockedDice() {
     dice.forEach((die) => {
         if (!die.classList.contains('dieLocked')) {
+
             //start animations
             die.classList.add('rolling');
 
@@ -269,11 +242,8 @@ function spinUnlockedDice() {
 
 // select single combo and update score
 function lockScore(combo) {
-    // when you click an unlocked score, it locks it and resets unlocked scores
-    // console.log()
     if (combo.classList.contains('scoreLocked')) {return}
     
-    // console.log(event.target.id)
     combo.classList.add("scoreLocked")
     lockedCombos++
     rolls = 0
@@ -346,18 +316,14 @@ function lockScore(combo) {
 }
 
 function updateBonuses() {
-    // fives.innerText = 60
-    // yahtzee.innerText = 50
 
     // if subtotal exceeds 63 or more, add 35 for subtotal bonus
     let sum = 0
     subScores.forEach((score) => {
-        if (score.innerText != '' ) {
-            sum += parseInt(score.innerText)
-            // console.log(`sum is ${sum}`)
+    if (score.innerText != '' ) {
+        sum += parseInt(score.innerText)
         } 
     })
-    // console.log(`sum is ${sum}`)
     subTotal.innerText = sum
     
     if (sum >= 63) {
@@ -365,10 +331,7 @@ function updateBonuses() {
         subBonusRow.classList.add('bonus')
     }
     
-    // also if yahtzee has value of 50 already
-    // and if currently valueFreq contains 5
-    // update yahtzee 100
-    // console.log(valueFreq)
+    //add 100 pts for bonus Yahtzees
     if (yahtzee.innerText == '50' && yahtzeeRow.classList.contains('scoreLocked') && valueFreq.includes(5)) {
         if (yahtzeeBonusEarned == false) {
             yahtzeeBonusEarned = true 
@@ -381,6 +344,7 @@ function updateBonuses() {
     }
 }
 
+//display messages for yahtzees
 function yahtzeeBanner() {
     if (yahtzee.innerText === '' && yahtzeeRow.classList.contains('scoreLocked') && valueFreq.includes(5)) {
         banner.classList.add('yahtzeeNull')
@@ -395,22 +359,20 @@ function yahtzeeBanner() {
 
 }
 
+//update total value at bottom
 function updateTotal(){
     let sum = 0
     scores.forEach((score) => {
         if (score.innerText != '' ) {
             sum += parseInt(score.innerText)
-            // console.log(`sum is ${sum}`)
         } 
     })
-    // console.log(`sum is ${sum}`)
     sum += parseInt(subBonus.innerText)
     sum += parseInt(yahtzeeBonus.innerText)
     total.innerText = sum
-    
 }
 
-// reset dice when select a combo
+// reset dice 
 function resetDice() {
     diceValues = [0,0,0,0,0]
     diceLocked = [false, false, false, false, false]
@@ -418,7 +380,7 @@ function resetDice() {
     updateDisplay()
 }
 
-// game ends after all 13 patterns have been selected
+// game ends after all 13 combos have been selected
 function checkGameOver() {
     if (lockedCombos >= 13) {
         console.log(banner.classList)
