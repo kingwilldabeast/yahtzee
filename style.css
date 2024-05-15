@@ -112,13 +112,14 @@ body {
 
 .gameOver {
     position: absolute;
-    top: 25%;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 8rem 6rem;
+    padding: 2rem 6rem;
     border-radius: 10%;
     background-color: #0c4722;
     text-align: center;
+    font-size: 50px;
     color: goldenrod;
     z-index: 1;
     opacity: 0.9;
@@ -126,14 +127,15 @@ body {
 
 .yahtzee {
     position: absolute;
-    top: 30%;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 7rem 6rem;
+    padding: 1rem 3rem;
     border: 1px solid olive;
     border-radius: 10%;
     background-color: #f3f313;
     text-align: center;
+    font-size: 50px;
     color: rgb(90, 54, 8);
     z-index: 1;
     opacity: 0.9;
@@ -178,13 +180,13 @@ body {
 
 /*--- makes an element cycle through dice numbers, from Chat GPT --- */
 @keyframes cycle {
-    0% { background-position: 0px 0px; }
-    100% { background-position: -300px 0px; }
+    0% { background-position: 50px 0px; }
+    100% { background-position: 350px 0px; }
 }
 
 .rolling {
-    width: 51px;
-    height: 51px;
+    width: 50px;
+    height: 50px;
     animation: cycle 0.5s steps(6) infinite, spin 1s ease-in-out ; 
   }
   
@@ -193,4 +195,18 @@ body {
         display: flex;
         flex-flow: row wrap;
     }
+
+    .gameOver {
+        padding: 2rem 4rem;
+        top: 40%
+    }
+
+    .yahtzee {
+        padding: 10px 10px;
+        top: 50%
+    }
+    .yahtzeeNull {
+        top: 40%;
+    }
+
   }

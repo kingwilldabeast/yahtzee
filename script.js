@@ -22,7 +22,19 @@ let largeStraightLock = false
 let yahtzeeLock = false
 let chanceLock = false
 let diceSound = new Audio('diceRoll.mp3') //Sound from Zapsplat.com
-
+let diceStyles = [
+    "styles/standard.png",
+    "styles/black.png",
+    "styles/green.png",
+    "styles/red.png",
+    "styles/royal.png",
+    "styles/alien.png",
+    "styles/rainbow.png",
+    "styles/rainbowNum.png",
+    "styles/gradient.png"
+  ];
+  let diceColor
+  
 
 /*------------------------ Cached Element References ------------------------*/
 const banner = document.querySelector('#banner')
@@ -30,6 +42,7 @@ const message = document.querySelector('#message')
 const dice = document.querySelectorAll('.dice')
 const roll = document.querySelector('#roll')
 const reset = document.querySelector('#reset')
+const switchColor = document.querySelector('#switchColor')
 const scores = document.querySelectorAll('.scores')
 const subScores = document.querySelectorAll('.subScores')
 const scoresRow = document.querySelectorAll('.scoreRowClickable')
@@ -73,8 +86,15 @@ const totalRow = document.querySelector('#totalRow')
 /*-------------------------------- Functions --------------------------------*/
 
 //initialize on load
+function init() {
+    diceColor = diceStyles[0]
+    resetGame()
+}
+
+//reset game and numbers and scores
 function resetGame() {
     resetDice()
+    updateDisplay()
 
     scores.forEach((score) => {
         score.innerText = ''
@@ -125,11 +145,10 @@ function rollDice() {
     for (let die = 0; die <= 4; die++) {
         if (diceLocked[die] == false) {
             let value = Math.ceil(Math.random()*6)
-            console.log(value)
             diceValues[die] = value
         }
     }
-    // diceValues = [2,2,2,2,2]
+    // diceValues = [6,6,6,6,6] to demo
     spinUnlockedDice()
     updateDisplay()
     updateValueFreq()
@@ -143,14 +162,10 @@ function rollDice() {
 function updateDisplay() {
     dice.forEach((die) => {
         let index = parseInt(die.getAttribute('id'))
-        if (diceValues[index] == 0) {
-            die.style.backgroundImage = ''
-        } else {
-        die.style.backgroundImage = "url(6dice.png)";
-        die.style.backgroundSize = "300px"
+        die.style.backgroundImage = `url('${diceColor}')`;
+        die.style.backgroundSize = "350px"
         offset = diceValues[index] * 50
-        die.style.backgroundPosition = offset + "px"
-        }
+        die.style.backgroundPosition = 350 - offset + "px"
         
         if (diceLocked[index] == true) {
             die.classList.add('dieLocked')
@@ -360,10 +375,10 @@ function yahtzeeBanner() {
         message.innerHTML = 'You rolled a Yahtzee but <BR> sadly cannot claim any points'
     } else if (!yahtzeeRow.classList.contains('scoreLocked') && valueFreq.includes(5)) {
         banner.classList.add('yahtzee')
-        message.innerHTML = 'CONGRATS! YOU ROLLED A <BR> YAHTZEE FOR 50 POINTS!'
+        message.innerHTML = 'CONGRATS! <BR> YOU ROLLED A <BR> YAHTZEE FOR <BR> 50 POINTS!'
     } else if (yahtzee.innerText === '50' && yahtzeeRow.classList.contains('scoreLocked') && valueFreq.includes(5)) {
         banner.classList.add('yahtzee')
-        message.innerHTML = 'CONGRATS! YOU ROLLED ANOTHER <BR> YAHTZEE FOR 100 POINTS BONUS!'
+        message.innerHTML = 'CONGRATS! <BR> YOU ROLLED <BR> ANOTHER <BR> YAHTZEE FOR <BR> 100 POINTS <BR> BONUS!'
     }
 
 }
@@ -392,19 +407,30 @@ function resetDice() {
 // game ends after all 13 combos have been selected
 function checkGameOver() {
     if (lockedCombos >= 13) {
-        console.log(banner.classList)
         banner.classList.remove('yahtzee','yahtzeeNull')
         banner.classList.add('gameOver')
-        console.log(banner.classList)
-        message.innerHTML = `GAME OVER! SCORE IS ${total.innerText}`
+        message.innerHTML = `GAME OVER! <BR> SCORE IS ${total.innerText}`
         reset.classList.add('pulse')
     }
 }
 
+function changeDiceColor() {
+    if (diceColor == diceStyles[diceStyles.length-1]) {
+        diceColor = diceStyles[0]
+    } else {
+        for (let index = 0; index < diceStyles.length; index++) {
+            if (diceColor == diceStyles[index]) {
+                diceColor = diceStyles[++index]
+            }
+            
+        }
+    }
+    updateDisplay()
+}
 
 /*----------------------------- Event Listeners -----------------------------*/
 
-document.querySelector('body').addEventListener("load", resetGame());
+document.querySelector('body').addEventListener("load", init());
 
 roll.addEventListener('click', rollDice)
 
@@ -421,3 +447,5 @@ scoresRow.forEach(function(scoreRow) {
         lockScore(scoreRow)
     });
 });
+
+switchColor.addEventListener('click', changeDiceColor)
