@@ -86,9 +86,9 @@ function resetGame() {
 
     subTotal.innerText = 0
     subBonusRow.classList.remove('bonus')
-    subBonus.innerText = 0
+    subBonus.innerText = ''
     yahtzeeBonusRow.classList.remove('bonus')
-    yahtzeeBonus.innerText = 0
+    yahtzeeBonus.innerText = ''
     yahtzeeBonusEarned = false
     total.innerText = 0
 
@@ -129,7 +129,7 @@ function rollDice() {
             diceValues[die] = value
         }
     }
-
+    // diceValues = [2,2,2,2,2]
     spinUnlockedDice()
     updateDisplay()
     updateValueFreq()
@@ -340,8 +340,14 @@ function updateBonuses() {
             yahtzeeBonusEarned = true 
 
         } else {
-            yahtzeeBonus.innerText = parseInt(yahtzeeBonus.innerText) + 100
-            yahtzeeBonusRow.classList.add('bonus')
+            if (yahtzeeBonus.innerText == "") {
+                yahtzeeBonus.innerText = 100
+                yahtzeeBonusRow.classList.add('bonus')
+
+            } else {
+                yahtzeeBonus.innerText = parseInt(yahtzeeBonus.innerText) + 100
+
+            }
         }
         
     }
@@ -370,8 +376,8 @@ function updateTotal(){
             sum += parseInt(score.innerText)
         } 
     })
-    sum += parseInt(subBonus.innerText)
-    sum += parseInt(yahtzeeBonus.innerText)
+    if (subBonus.innerText != "") {sum += parseInt(subBonus.innerText)}
+    if (yahtzeeBonus.innerText != "") {sum += parseInt(yahtzeeBonus.innerText)}
     total.innerText = sum
 }
 

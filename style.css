@@ -72,37 +72,32 @@ body {
 #scoreColumn {
     display: flex;
     flex-direction: column;
-    margin: 10px;
+    margin: 0 10px 10px 0;
     align-items: center;
 
 }
 
-.scoreRow {
-    border: 2px solid darkgray;
-    background-color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 140px;
-    height: 25px;
-    padding: 0 5px;
-
-}
-
-.scoreRowClickable {
+.scoreRow, .scoreRowClickable {
     border: 1px solid lightgray;
     background-color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 140px;
+    width: 150px;
     height: 25px;
-    padding: 0 5px;
+    padding: 0px 5px;
+
 }
 
 .scores, #subTotal, #subBonus, #yahtzeeBonus, #total {
     width: 20px;
     text-align: end;
+    padding: 0 5px 0 0;
+}
+
+#subTotalRow, #totalRow {
+    background-color: rgb(125, 238, 238);
+    border: 1px solid darkblue;
 }
 
 .scoreLocked {
