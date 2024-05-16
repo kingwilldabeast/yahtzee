@@ -122,7 +122,7 @@ body {
     font-size: 50px;
     color: goldenrod;
     z-index: 1;
-    opacity: 0.2;
+    opacity: 0.9;
   }
 
 .yahtzee {
@@ -301,19 +301,19 @@ body {
       }
     
     20% {
-        transform: translate(-200%, 150%);
+        transform: translate(-200px, 150px);
     }
 
     40% {
-        transform: translate(-400%, -200%);
+        transform: translate(-400px, -200px);
     }
 
     60% {
-        transform: translate(0, 0);
+        transform: translate(100, 100);
     }
 
     80% {
-        transform: translate(300%, -400%);
+        transform: translate(300px, -400px);
     }
     
     100% {
@@ -322,30 +322,25 @@ body {
 }
 
 .flying0 {
-    position: absolute;
-    animation: spin 3s linear infinite, zigzag0 7s linear infinite;
+    animation: zigzag0 4s linear infinite;
 }
 
 .flying1 {
-    position: absolute;
-    animation: 3s linear infinite zigzag1, 2s linear infinite spin;
+    animation: zigzag1 4s linear infinite;
 }
 
 .flying2 {
-    position: absolute;
-    animation: 3s linear infinite zigzag2, 2s linear infinite spin;
+    animation: zigzag2 4s linear infinite;
 }
 
 .flying3 {
-    position: absolute;
-    animation: 3s linear infinite zigzag3, 2s linear infinite spin;
+    animation: zigzag3 4s linear infinite;
 }
 
 .flying4 {
-    position: absolute;
-    animation: 3s linear infinite zigzag4, 2s linear infinite spin;
+    animation: zigzag4 4s linear infinite;
 }
-  
+
 @media screen and (max-width: 500px) {
 
     #diceRow {
