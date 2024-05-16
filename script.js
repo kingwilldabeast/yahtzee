@@ -118,6 +118,9 @@ function resetGame() {
     banner.className = ''
     message.innerHTML = ''
     reset.classList.remove('pulse')
+    dice.forEach((cube) => {
+        index = cube.getAttribute("id")
+        cube.classList.remove(`flying${index}`)    })
 
     onesLock = false
     twosLock = false
@@ -148,7 +151,7 @@ function rollDice() {
             diceValues[die] = value
         }
     }
-    // diceValues = [6,6,6,6,6] to demo
+    // diceValues = [6,6,6,6,6] //to demo
     spinUnlockedDice()
     updateDisplay()
     updateValueFreq()
@@ -327,7 +330,9 @@ function lockScore(combo) {
 
     updateBonuses()
     updateTotal()
-    resetDice()
+    if (lockedCombos < 13) {
+        resetDice()
+    }
     banner.className = ''
     message.innerHTML = ''
     checkGameOver()
@@ -411,6 +416,10 @@ function checkGameOver() {
         banner.classList.add('gameOver')
         message.innerHTML = `GAME OVER! <BR> SCORE IS ${total.innerText}`
         reset.classList.add('pulse')
+        dice.forEach((cube) => {
+            index = cube.getAttribute("id")
+            cube.classList.add(`flying${index}`)
+        })
     }
 }
 
