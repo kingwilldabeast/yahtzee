@@ -151,7 +151,7 @@ function rollDice() {
             diceValues[die] = value
         }
     }
-    // diceValues = [6,6,6,6,6] //to demo
+    // diceValues = [6,6,6,6,6] //FOR DEMO PURPOSES ONLY
     spinUnlockedDice()
     updateDisplay()
     updateValueFreq()
