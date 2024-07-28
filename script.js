@@ -152,6 +152,8 @@ function rollDice() {
         }
     }
     // diceValues = [6,6,6,6,6] //FOR DEMO PURPOSES ONLY
+    // diceValues = [5,4,2,1,3] //FOR DEMO PURPOSES ONLY
+    // diceValues = [5,4,5,4,4] //FOR DEMO PURPOSES ONLY
     spinUnlockedDice()
     updateDisplay()
     updateValueFreq()

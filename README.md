@@ -1,8 +1,9 @@
 # Yahtzee
 a game of Yahtzee with five dice
 
-![image of dice](dice.png)
-Image source: Getty Images
+## Mockup:
+
+![image of wireframe](mockup.png)
 
 ## Description
 
@@ -34,4 +35,3 @@ The patterns and scores are as follows.
 - Every additional Yahtzee: 100 points bonus, automatically added
 - Chance: sum of dice total
 
-![image of wireframe](mockup.png)
